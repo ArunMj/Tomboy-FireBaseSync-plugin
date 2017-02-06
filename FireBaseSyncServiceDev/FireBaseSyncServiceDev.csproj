@@ -57,4 +57,7 @@
     <Compile Include="FireBaseSyncServer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="FireBaseSyncService.addin.xml" />
+  </ItemGroup>
 </Project>
