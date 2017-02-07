@@ -4,11 +4,11 @@ using Tomboy.Sync;
 using System.Collections.Generic;
 using System.Collections;
 
-namespace Tomboy.SyncPlugin
+namespace Tomboy.FirebaseAddin
 {
-    public class FireBaseSyncServer: SyncServer
+    public class FirebaseSyncServer: SyncServer
     {
-        public FireBaseSyncServer ()
+        public FirebaseSyncServer ()
         {
             //throw new Exception ("dshjfdsjhfjdgfjhgdjhg");
         }

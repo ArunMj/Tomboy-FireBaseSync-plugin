@@ -5,8 +5,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{66CAA569-28B1-43CE-981D-BE99A14E690A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Tomboy.SyncPlugin</RootNamespace>
-    <AssemblyName>FireBaseSyncService</AssemblyName>
+    <RootNamespace>Tomboy.FirebaseAddin</RootNamespace>
+    <AssemblyName>Tomboy-FirebaseSync-plugin</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -18,6 +18,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="cp -nrv  ${ProjectDir}/libs/.   ${TargetDir}" workingdir="${TargetDir}" />
+        <Command type="Custom" name="Run in Tomboy" command="mono Tomboy.exe --debug  --note-path notestore" workingdir="${TargetDir}" pauseExternalConsole="True" />
+      </CustomCommands>
+    </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -53,11 +59,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FireBaseSyncService.cs" />
-    <Compile Include="FireBaseSyncServer.cs" />
+    <Compile Include="FirebaseSyncServer.cs" />
+    <Compile Include="FirebaseSyncServiceAddin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="FireBaseSyncService.addin.xml" />
+    <EmbeddedResource Include="FirebaseSyncService.addin.xml" />
   </ItemGroup>
 </Project>

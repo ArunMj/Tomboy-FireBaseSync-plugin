@@ -1,14 +1,14 @@
-﻿<Addin id="FireBaseSyncServiceDev"
+﻿<Addin id="FirebaseSyncServiceAddin007"
 	namespace="Tomboy"
-	name="FireBaseSyncService Add-in Dev "
+	name="FireBaseSyncServiceAddin[Dev]"
 	author="Arun M J"
-	description="Devel test "
+	description="Develepment test phase"
 	category="Synchronization"
 	defaultEnabled="true"
 	version="1.0">
 
 	<Runtime>
-		<Import assembly="FireBaseSyncService.dll" />
+		<Import assembly="Tomboy-FirebaseSync-plugin.dll" />
 	</Runtime>
 
 	<Dependencies>
@@ -16,6 +16,6 @@
 	</Dependencies>
 
 	<Extension path="/Tomboy/SyncServiceAddins">
-		<SyncServiceAddin type="Tomboy.SyncPlugin.FireBaseSyncServiceDev" />
+		<SyncServiceAddin type="Tomboy.FirebaseAddin.FirebaseSyncServiceAddin" />
 	</Extension>
 </Addin>

@@ -1,9 +1,9 @@
 ﻿using System;
 using Tomboy.Sync;
 
-namespace Tomboy.SyncPlugin
+namespace Tomboy.FirebaseAddin
 {
-    public class FireBaseSyncService : SyncServiceAddin
+    public class FirebaseSyncServiceAddin : SyncServiceAddin
     {
         // ----  private vars
 
@@ -12,7 +12,7 @@ namespace Tomboy.SyncPlugin
         //
         // Constructor
         //
-        public FireBaseSyncService ()
+        public FirebaseSyncServiceAddin ()
         {
             //TODO
         }
@@ -84,7 +84,7 @@ namespace Tomboy.SyncPlugin
         public override  SyncServer CreateSyncServer ()
         {
             //TODO
-            return new FireBaseSyncServer ();
+            return new FirebaseSyncServer ();
         }
 
         public override  void PostSyncCleanup ()
