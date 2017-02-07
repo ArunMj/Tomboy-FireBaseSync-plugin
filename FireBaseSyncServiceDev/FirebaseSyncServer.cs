@@ -29,6 +29,7 @@ namespace Tomboy.FirebaseAddin
             get;
         }
 
+		// NOTE: Only reliable during a transaction
         public int LatestRevision {
             //TODO
             get;
