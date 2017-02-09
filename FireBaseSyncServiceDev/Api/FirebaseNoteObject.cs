@@ -7,23 +7,23 @@ namespace Tomboy.FirebaseAddin.Api
         
         #region Public Static Methods
 
-        public static FirebaseNoteObject ParseJson (string jsonString){
+        public static FirebaseNoteObject FromJson (string jsonString){
             Hyena.Json.Deserializer deserializer =
                 new Hyena.Json.Deserializer (jsonString);
             object obj = deserializer.Deserialize ();
 
             Hyena.Json.JsonObject jsonObj =
                 obj as Hyena.Json.JsonObject;
-            return ParseJson (jsonObj);
+            return FromJson (jsonObj);
         }
 
-        public static FirebaseNoteObject ParseJson (Hyena.Json.JsonObject jsonObj){
+        public static FirebaseNoteObject FromJson (Hyena.Json.JsonObject jsonObj){
             if (jsonObj == null)
                 throw new ArgumentException ("jsonObj does not contain a valid FirebaseNoteObject representation");
 
             // TODO: Checks
-            FirebaseNoteObject note = new FirebaseNoteObject ();
-            note.Guid = (string) jsonObj ["guid"];
+			FirebaseNoteObject fbNoteObj = new FirebaseNoteObject ();
+            fbNoteObj.Guid = (string) jsonObj ["guid"];
 
             // TODO: Decide how much is required
             object val = 0;
@@ -31,53 +31,50 @@ namespace Tomboy.FirebaseAddin.Api
             try {
                 key = TitleElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.Title = (string) val;
+                    fbNoteObj.Title = (string) val;
                 key = NoteContentElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.NoteContent = (string) val;
+                    fbNoteObj.NoteContent = (string) val;
                 key = NoteContentVersionElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.NoteContentVersion = (double) val;
+                    fbNoteObj.NoteContentVersion = (double) val;
 
                 key = LastChangeDateElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.LastChangeDate = DateTime.Parse ((string) val);
+                    fbNoteObj.LastChangeDate = DateTime.Parse ((string) val);
                 key = LastMetadataChangeDateElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.LastMetadataChangeDate = DateTime.Parse ((string) val);
+                    fbNoteObj.LastMetadataChangeDate = DateTime.Parse ((string) val);
                 key = CreateDateElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.CreateDate = DateTime.Parse ((string) val);
+                    fbNoteObj.CreateDate = DateTime.Parse ((string) val);
 
                 key = LastSyncRevisionElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.LastSyncRevision = (int) val;
+                    fbNoteObj.LastSyncRevision = (int) val;
                 key = OpenOnStartupElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.OpenOnStartup = (bool) val;
+                    fbNoteObj.OpenOnStartup = (bool) val;
                 key = PinnedElementName;
                 if (jsonObj.TryGetValue (key, out val))
-                    note.Pinned = (bool) val;
+                    fbNoteObj.Pinned = (bool) val;
 
                 key = TagsElementName;
                 if (jsonObj.TryGetValue (key, out val)) {
                     Hyena.Json.JsonArray tagsJsonArray =
                         (Hyena.Json.JsonArray) val;
-                    note.Tags = new List<string> (tagsJsonArray.Count);
+                    fbNoteObj.Tags = new List<string> (tagsJsonArray.Count);
                     foreach (string tag in tagsJsonArray)
-                        note.Tags.Add (tag);
+                        fbNoteObj.Tags.Add (tag);
                 }
-
-                key = ResourceReferenceElementName;
-                if (jsonObj.TryGetValue (key, out val))
-                    note.ResourceReference =
-                        ResourceReference.ParseJson ((Hyena.Json.JsonObject) val);
+					
             } catch (InvalidCastException e) {
-                Logger.Error("Note '{0}': Key '{1}', value  '{2}' failed to parse due to invalid type", note.Guid, key, val);
+                Logger.Error("Note '{0}': Key '{1}', value  '{2}' failed to parse due to invalid type",
+								fbNoteObj.Guid, key, val);
                 throw e;
             }
 
-            return note;
+            return fbNoteObj;
         }
 
         #endregion
@@ -88,7 +85,7 @@ namespace Tomboy.FirebaseAddin.Api
         /// Tos the update object.
         /// </summary>
         /// <returns>The update object.</returns>
-        public Hyena.Json.JsonObject ToUpdateObject (){
+        public Hyena.Json.JsonObject ToJson (){
             Hyena.Json.JsonObject noteUpdateObj =
                 new Hyena.Json.JsonObject ();
 
@@ -144,8 +141,6 @@ namespace Tomboy.FirebaseAddin.Api
 
         public string Guid { get; set; }
 
-        public ResourceReference ResourceReference { get; set; }
-
         public string Title { get; set; }
 
         public string NoteContent { get; set; }
@@ -173,7 +168,6 @@ namespace Tomboy.FirebaseAddin.Api
         #region Private Constants
 
         private const string GuidElementName = "guid";
-        private const string ResourceReferenceElementName = "ref";
         private const string TitleElementName = "title";
         private const string NoteContentElementName = "note-content";
         private const string NoteContentVersionElementName = "note-content-version";

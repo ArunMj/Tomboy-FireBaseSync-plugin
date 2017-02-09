@@ -26,13 +26,13 @@ namespace Tomboy.FirebaseAddin
 
         public string Id {
             //TODO
-            get;
+			get;//{Logger.Debug ("***** 	asking ID propery ****");}
         }
 
 		// NOTE: Only reliable during a transaction
         public int LatestRevision {
             //TODO
-            get;
+			get;//{	Logger.Debug ("***** 	LatestRevision propery ****");}
         }
 
         //
@@ -87,11 +87,13 @@ namespace Tomboy.FirebaseAddin
        
         public IDictionary<string, NoteUpdate> GetNoteUpdatesSince (int revision){
             //TODO
+			Logger.Debug("** gets GetNoteUpdatesSince " + revision.ToString());
             return new Dictionary<string, NoteUpdate>();
         }
 
         public bool UpdatesAvailableSince (int revision){
             //TODO
+			Logger.Debug("** checking updateAvailableSince " + revision.ToString());
             return false;
         }
 
@@ -102,7 +104,7 @@ namespace Tomboy.FirebaseAddin
                 Console.WriteLine("-------------"
                     
                 );
-                NoteConvert.ToFirebaseNoteObject(note).ToUpdateObject().Dump();
+                NoteConvert.ToFirebaseNoteObject(note).ToJson().Dump();
             }
         }
 
