@@ -5,25 +5,25 @@ namespace Tomboy.FirebaseAddin
 {
     public class FirebaseSyncServiceAddin : SyncServiceAddin
     {
-        // ----  private vars
-
+        /* --  private vars */
         bool isInitialized;
 
-        //
-        // Constructor
-        //
-        public FirebaseSyncServiceAddin ()
+        /// <summary>
+        /// Just create an instant; Nothing more.
+        /// </summary>
+        public FirebaseSyncServiceAddin()
         {
-            //TODO
+            isInitialized = false;
         }
-
+     
         #region ApplicationAddin Overrides (inherited abstract members)
         /* Properties */
 
         /// <summary>
         /// Return true if the addin is initialized
         /// </summary>
-        public override bool Initialized {
+        public override bool Initialized 
+        {
             get { return isInitialized; }
         }
 
@@ -53,7 +53,6 @@ namespace Tomboy.FirebaseAddin
        
         /* Properties */
 
-
         /* this one is virtual ,method */
 		/// <summary>
 		/// Returns true if required settings are valid in the widget
@@ -61,6 +60,7 @@ namespace Tomboy.FirebaseAddin
 		/// </summary>
         public override bool AreSettingsValid {
             //TODO
+            // just for testing. will validate later.
             get {return true;}
         }
 
@@ -78,7 +78,7 @@ namespace Tomboy.FirebaseAddin
 		/// Returns whether the addin is configured enough to actually be used.
 		/// </summary>
         public override bool IsConfigured {
-            //TODO
+            //TODO: will check later
             get { return true;}
         }
 
@@ -92,6 +92,7 @@ namespace Tomboy.FirebaseAddin
 		/// </summary>
         public override bool IsSupported {
             //TODO
+            // I dont think this will ever false.
             get { return true;}
         }
 

@@ -1,0 +1,1276 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tomboy</name>
+    </assembly>
+    <members>
+        <member name="M:Tomboy.ActionManager.GetPlaceholderChildren(System.String)">
+             <summary>
+             Get all widgets represents by XML elements that are children
+             of the placeholder element specified by path.
+             </summary>
+             <param name="path">
+             A <see cref="T:System.String" /> representing the path to
+             the placeholder of interest.
+             </param>
+             <returns>
+             A <see cref="!:IList`1" /> of Gtk.Widget objects corresponding
+             to the XML child elements of the placeholder element.
+             </returns>
+            </member>
+        <member name="T:ManagedWinapi.Windows.WndProcEventHandler">
+             <summary>
+             Called by an EventDispatchingNativeWindow when a window message is received
+             </summary>
+             <param name="m">The message to handle.</param>
+             <param name="handled">Whether the event has already been handled. If this value is true, the handler
+             should return immediately. It may set the value to true to indicate that no others 
+             should handle it. If the event is not handled by any handler, it is passed to the
+             default WindowProc.</param>
+            </member>
+        <member name="T:ManagedWinapi.Windows.EventDispatchingNativeWindow">
+             <summary>
+             A Win32 native window that delegates window messages to handlers. So several
+             components can use the same native window to save "USER resources". This class
+             is useful when writing your own components.
+             </summary>
+            </member>
+        <member name="P:ManagedWinapi.Windows.EventDispatchingNativeWindow.Instance">
+             <summary>
+             A global instance which can be used by components that do not need
+             their own window.
+             </summary>
+            </member>
+        <member name="E:ManagedWinapi.Windows.EventDispatchingNativeWindow.EventHandler">
+             <summary>
+             Attach your event handlers here.
+             </summary>
+            </member>
+        <member name="M:ManagedWinapi.Windows.EventDispatchingNativeWindow.#ctor">
+             <summary>
+             Create your own event dispatching window.
+             </summary>
+            </member>
+        <member name="M:ManagedWinapi.Windows.EventDispatchingNativeWindow.WndProc(System.Windows.Forms.Message@)">
+             <summary>
+             Parse messages passed to this window and send them to the event handlers.
+             </summary>
+             <param name="m">A System.Windows.Forms.Message that is associated with the 
+             current Windows message.</param>
+            </member>
+        <member name="T:ManagedWinapi.Hotkey">
+             <summary>
+             Specifies a component that creates a global keyboard hotkey.
+             </summary>
+            </member>
+        <member name="E:ManagedWinapi.Hotkey.HotkeyPressed">
+             <summary>
+             Occurs when the hotkey is pressed.
+             </summary>
+            </member>
+        <member name="M:ManagedWinapi.Hotkey.#ctor(System.ComponentModel.IContainer)">
+             <summary>
+             Initializes a new instance of this class with the specified container.
+             </summary>
+             <param name="container">The container to add it to.</param>
+            </member>
+        <member name="M:ManagedWinapi.Hotkey.#ctor">
+             <summary>
+             Initializes a new instance of this class.
+             </summary>
+            </member>
+        <member name="P:ManagedWinapi.Hotkey.Enabled">
+             <summary>
+             Enables the hotkey. When the hotkey is enabled, pressing it causes a
+             <c>HotkeyPressed</c> event instead of being handled by the active 
+             application.
+             </summary>
+            </member>
+        <member name="P:ManagedWinapi.Hotkey.KeyCode">
+             <summary>
+             The key code of the hotkey.
+             </summary>
+            </member>
+        <member name="P:ManagedWinapi.Hotkey.Ctrl">
+             <summary>
+             Whether the shortcut includes the Control modifier.
+             </summary>
+            </member>
+        <member name="P:ManagedWinapi.Hotkey.Alt">
+             <summary>
+             Whether this shortcut includes the Alt modifier.
+             </summary>
+            </member>
+        <member name="P:ManagedWinapi.Hotkey.Shift">
+             <summary>
+             Whether this shortcut includes the shift modifier.
+             </summary>
+            </member>
+        <member name="P:ManagedWinapi.Hotkey.WindowsKey">
+             <summary>
+             Whether this shortcut includes the Windows key modifier. The windows key
+             is an addition by Microsoft to the keyboard layout. It is located between
+             Control and Alt and depicts a Windows flag.
+             </summary>
+            </member>
+        <member name="M:ManagedWinapi.Hotkey.Dispose(System.Boolean)">
+             <summary>
+             Releases all resources used by the System.ComponentModel.Component.
+             </summary>
+             <param name="disposing">Whether to dispose managed resources.</param>
+            </member>
+        <member name="T:ManagedWinapi.HotkeyAlreadyInUseException">
+             <summary>
+             The exception is thrown when a hotkey should be registered that
+             has already been registered by another application.
+             </summary>
+            </member>
+        <member name="P:Tomboy.NoteData.ChangeDate">
+             <summary>
+             Indicates the last time note content data changed.
+             Does not include tag/notebook changes (see MetadataChangeDate).
+             </summary>
+            </member>
+        <member name="P:Tomboy.NoteData.MetadataChangeDate">
+             <summary>
+             Indicates the last time non-content note data changed.
+             This currently only applies to tags/notebooks.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Note.UrlFromPath(System.String)">
+             <summary>
+             Returns a Tomboy URL from the given path.
+             </summary>
+             <param name="filepath">
+             A <see cref="T:System.String" />
+             </param>
+             <returns>
+             A <see cref="T:System.String" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.Note.CreateNewNote(System.String,System.String,Tomboy.NoteManager)">
+             <summary>
+             Creates a New Note with the given values.
+             </summary>
+             <param name="title">
+             A <see cref="T:System.String" />
+             </param>
+             <param name="filepath">
+             A <see cref="T:System.String" />
+             </param>
+             <param name="manager">
+             A <see cref="T:Tomboy.NoteManager" />
+             </param>
+             <returns>
+             A <see cref="T:Tomboy.Note" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.Note.QueueSave(Tomboy.ChangeType)">
+             <summary>
+             Set a timeout to execute the save.  Possibly
+             invalidate the text, which causes a re-serialize when the
+             timeout is called...
+             </summary>
+             <param name="content_changed">Indicates whether or not
+             to update the note's last change date</param>
+            </member>
+        <member name="M:Tomboy.Note.GetCompleteNoteXml">
+             <summary>
+             Return the complete contents of this note's .note XML file
+             In case of any error, null is returned.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Note.ChangeDate">
+             <summary>
+             Indicates the last time note content data changed.
+             Does not include tag/notebook changes (see MetadataChangeDate).
+             </summary>
+            </member>
+        <member name="P:Tomboy.Note.MetadataChangeDate">
+             <summary>
+             Indicates the last time non-content note data changed.
+             This currently only applies to tags/notebooks.
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteBuffer.GetDynamicTag(System.String,Gtk.TextIter)">
+             <summary>
+             Returns the specified DynamicNoteTag if one exists on the TextIter
+             or null if none was found.
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteManager.GtkInvoke(System.Action)">
+             <summary>
+             Use Gtk.Application.Invoke to invoke the Action delegate
+             once this NoteManager is initialized. If this NoteManager
+             is already initialized, Gtk.Application.Invoke is *not*
+             used (for performance reasons).  In other words, this method
+             should only be called from the GTK+ main thread.
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteManager.CreateWithGuid(System.String,System.String)">
+             <summary>
+             Creates a new note with GUID.
+             </summary>
+             <returns>
+             Empty note with specified title and GUID.
+             </returns>
+             <param name="title">
+             Title.
+             </param>
+             <param name="guid">
+             GUID.
+             </param>
+            </member>
+        <member name="M:Tomboy.NoteManager.GetOrCreateTemplateNote">
+             <summary>
+             Get the existing template note or create a new one
+             if it doesn't already exist.
+             </summary>
+             <returns>
+             A <see cref="T:Tomboy.Note" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.NoteManager.CreateNoteFromTemplate(System.String,Tomboy.Note)">
+             <summary>
+             Creates a new note with the given titel based on the template note.
+             </summary>
+             <param name="title">
+             A <see cref="T:System.String" />
+             </param>
+             <param name="template_note">
+             A <see cref="T:Tomboy.Note" />
+             </param>
+             <returns>
+             A <see cref="T:Tomboy.Note" />
+             </returns>
+            </member>
+        <member name="F:Tomboy.NoteTag.SaveType">
+             <summary>
+             How the note should be saved when this tag is modified
+             </summary>
+            </member>
+        <member name="M:Tomboy.DynamicNoteTag.OnAttributeRead(System.String)">
+             <summary>
+             Derived classes should override this if they desire
+             to be notified when a tag attribute is read in.
+             </summary>
+             <param name="attributeName">
+             A <see cref="T:System.String" /> that is the name of the
+             newly read attribute.
+             </param>
+            </member>
+        <member name="M:Tomboy.NoteTagTable.GetChangeType(Gtk.TextTag)">
+             <summary>
+             Maps a Gtk.TextTag to ChangeType for saving notes
+             </summary>
+             <param name="tag">Gtk.TextTag to map</param>
+             <returns>ChangeType to save this NoteTag</returns>
+            </member>
+        <member name="P:Tomboy.NoteWindow.DeleteButton">
+             <summary>
+             The Delete Toolbar Button
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteFindBar.UpdateMatchCount(System.Int32)">
+             <summary>
+             Updates the match count.
+             </summary>
+             <param name="location">
+             Current location in the List of Matched notes
+             </param>
+            </member>
+        <member name="M:Tomboy.NoteFindBar.ClearMatchCount">
+             <summary>
+             Clears the match count.
+             </summary>
+            </member>
+        <member name="F:Tomboy.NoteRecentChanges.current_matches">
+             <summary>
+             Stores search results as integers hashed by note uri.
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteRecentChanges.FilterNotes(Gtk.TreeModel,Gtk.TreeIter)">
+             <summary>
+             Filter out notes based on the current search string
+             and selected tags.  Also prevent template notes from
+             appearing.
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteRecentChanges.GetSelectedNotebook">
+             <summary>
+             Returns the currently selected notebook in the "Search All Notes Window".
+             </summary>
+             <returns>
+             The selected notebook or null if no notebook is selected. <see cref="T:Tomboy.Notebooks.Notebook" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.NoteRecentChanges.SavePosition">
+             <summary>
+             Save the position and size of the RecentChanges window
+             </summary>
+            </member>
+        <member name="M:Tomboy.RemoteControl.SetNoteCompleteXml(System.String,System.String)">
+             <summary>
+             Reset the entire XML data for the given note.
+             NOTE: Throws exception if xml_contents is invalid.
+             </summary>
+            </member>
+        <member name="T:Tomboy.RemoteControlWrapper">
+             <summary>
+             Wrap the RemoteControl class methods in Gtk.Application.Invoke.
+             </summary>
+            </member>
+        <member name="P:Tomboy.TomboyCommandLine.Addin_argslist">
+             <summary>
+             Returns all the command line arguments that are
+             prefixed with "--addin:" and their parameters.
+             </summary>
+            </member>
+        <member name="M:Tomboy.GuiUtils.GetPrettyPrintDate(System.DateTime,System.Boolean)">
+             <summary>
+             Get a string that is more friendly/pretty for the specified date.
+             For example, "Today, 3:00 PM", "4 days ago, 9:20 AM".
+             <param name="date">The DateTime to evaluate</param>
+             <param name="show_time">If true, output the time along with the
+             date</param>
+             </summary>
+            </member>
+        <member name="M:Tomboy.GuiUtils.GtkInvokeAndWait(System.Action)">
+             <summary>
+             Invoke a method on the GUI thread, and wait for it to
+             return. If the method raises an exception, it will be
+             thrown from this method.
+             </summary>
+             <param name="a">
+             The action to invoke.
+             </param>
+            </member>
+        <member name="M:Tomboy.GuiUtils.GetSearchMatchColor">
+             <summary>
+             Returns Gdk.Color used as the background for the Search Match Highlight tag.
+             If current preference value is unparsable or custom option is not selected,
+             default preference value is returned instead.
+             </summary>
+             <returns>Gdk.Color for search match highlight</returns>
+            </member>
+        <member name="M:Tomboy.GuiUtils.GetPrefSearchMatchColor">
+             <summary>
+             Gets the search match highlight color from the preference.
+             </summary>
+             <returns>The preference search match highlight color or default if unparsable.</returns>
+            </member>
+        <member name="M:Tomboy.GuiUtils.GetDefaultSearchMatchColor">
+             <summary>
+             Gets the default highlight color of the search match.
+             </summary>
+             <returns>The default search match highlight color.</returns>
+            </member>
+        <member name="M:Tomboy.GuiUtils.GetGdkColorFromHexRgbHashString(System.String)">
+             <summary>
+             Converts hex RGB hash string to Gdk.Color, see Gdk.Color.Parse() docs for acceptable formats.
+             </summary>
+             <returns>The Gdk.Color or throws an InvalidDataException if unparsable.</returns>
+             <param name="hash_string">Hex RGB hash string.</param>
+            </member>
+        <member name="M:Tomboy.GuiUtils.GetHexRgbHashStringFromGdkColor(Gdk.Color)">
+             <summary>
+             Converts Gdk.Color to hex RGB hash string using ToString() and some custom parsing to alleviate
+             GTK# 2.12 limitation of ToString() result being unparsable with Parse().
+             </summary>
+             <returns>The hex RGB hash string.</returns>
+             <param name="color">Color as Gdk.Color</param>
+            </member>
+        <member name="P:Tomboy.HIGMessageDialog.Pixbuf">
+             <value>
+             This allows you to set the Gdk.Pixbuf for the dialog's Gtk.Image.
+             </value>
+            </member>
+        <member name="M:Tomboy.IOUtils.CopyDirectory(System.String,System.String)">
+             <summary>
+             Recursively copy the directory specified by old_path to
+             new_path. Assumes that old_path is an existing directory
+             and new_path does not exist.
+             </summary>
+            </member>
+        <member name="F:Tomboy.TagManager.TemplateNoteSystemTag">
+             <summary>
+             This is the system tag that is added to all template notes.  Various
+             UI modules in Tomboy should filter template notes from appearing in
+             certain places such as, Search All Notes Window, Main Menu, etc.
+             </summary>
+            </member>
+        <member name="M:Tomboy.TagManager.GetSystemTag(System.String)">
+             <summary>
+             Same as GetTag(), but for a system tag.
+             </summary>
+             <param name="tag_name">
+             A <see cref="T:System.String" />.  This method will handle adding
+             any needed "system:" or identifier needed.
+             </param>
+             <returns>
+             A <see cref="T:Tomboy.Tag" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.TagManager.GetOrCreateSystemTag(System.String)">
+             <summary>
+             Same as <see cref="!:Tomboy.TagManager.GetSystemTag" /> except that
+             a new tag will be created if the specified one doesn't exist.
+             </summary>
+             <param name="tag_name">
+             A <see cref="T:System.String" />
+             </param>
+             <returns>
+             A <see cref="T:Tomboy.Tag" />
+             </returns>
+            </member>
+        <member name="P:Tomboy.TagManager.AllTags">
+             <value>
+             All tags (including system and property tags)
+             </value>
+            </member>
+        <member name="P:Tomboy.Tag.IsSystem">
+             <value>
+             Is Tag a System Value
+             </value>
+            </member>
+        <member name="P:Tomboy.Tag.IsProperty">
+             <value>
+             Is Tag a Property?
+             </value>
+            </member>
+        <member name="F:Tomboy.PreferencesDialog.addin_prefs_dialogs">
+             <summary>
+             Keep track of the opened addin prefs dialogs so other windows
+             can be interacted with (as opposed to opening these as modal
+             dialogs).
+            
+             Key = Mono.Addins.Addin.Id
+             </summary>
+            </member>
+        <member name="F:Tomboy.PreferencesDialog.addin_info_dialogs">
+             <summary>
+             Used to keep track of open AddinInfoDialogs.
+             Key = Mono.Addins.Addin.Id
+             </summary>
+            </member>
+        <member name="M:Tomboy.PreferencesDialog.OnClickedClose(System.Object,System.EventArgs)">
+             <summary>
+             Close the Preferences Window
+             </summary>
+             <param name="sender">
+             A <see cref="T:System.Object" />
+             </param>
+             <param name="args">
+             A <see cref="T:System.EventArgs" />
+             </param>
+            </member>
+        <member name="M:Tomboy.PreferencesDialog.UpdateAddinButtons">
+             <summary>
+             Set the sensitivity of the buttons based on what is selected
+             </summary>
+            </member>
+        <member name="M:Tomboy.PreferencesDialog.OnSaveSyncAddinButton(System.Object,System.EventArgs)">
+             <summary>
+             Attempt to save/test the connection to the sync addin.
+             </summary>
+            </member>
+        <member name="T:Tomboy.ApplicationAddin">
+             <summary>
+             Implement this interface if your Addin needs to do things when Tomboy
+             starts up and shuts down.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ApplicationAddin.Initialize">
+             <summary>
+             Called when Tomboy has started up and is nearly 100% initialized.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ApplicationAddin.Shutdown">
+             <summary>
+             Called just before Tomboy shuts down for good.
+             </summary>
+            </member>
+        <member name="P:Tomboy.ApplicationAddin.Initialized">
+             <summary>
+             Return true if the addin is initialized
+             </summary>
+            </member>
+        <member name="T:Tomboy.ExportAllApplicationAddin">
+             <summary>
+             An abstract class which handles all the details of "export all",
+             to be subclassed with a method that defines what to do with a
+             single note.
+             </summary>
+            </member>
+        <member name="F:Tomboy.ExportAllApplicationAddin.export_file_suffix">
+             <summary>
+             The filename suffix of the export type, e.g. "html" or "txt".
+             Don't put a punctuation mark in front!
+             </summary>
+            </member>
+        <member name="F:Tomboy.ExportAllApplicationAddin.export_type_pretty_name">
+             <summary>
+             The full name to be used in the menu. Can include spaces, should use Catalog.GetString.
+             </summary>
+            </member>
+        <member name="F:Tomboy.ExportAllApplicationAddin.exporting_single_notebook">
+             <summary>
+             Used to inform the path resolver if all notes are being exported or just one notebook.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.Initialize">
+             <summary>
+             Called when Tomboy has started up and is nearly 100% initialized.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.SetNames">
+             <summary>
+             Must be overridden in order to set names for internal menu use
+             and file naming (export_file_suffix) and what the user sees
+             (export_type_pretty_name).
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.Shutdown">
+             <summary>
+             Called just before Tomboy shuts down for good.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.ParseArgs(System.Object,System.EventArgs)">
+             <summary>
+             An event handler that parses add-in commandline args looking for commands relating to
+             this class and executes them.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.ExportAllNotes(System.String)">
+             <summary>
+             Exports all notes to a given folder.
+             </summary>
+             <param name="output_folder"> The folder that the notes will be exported to. </param>
+            </member>
+        <!--FIXME: Invalid documentation markup was found for member M:Tomboy.ExportAllApplicationAddin.ExportAllNotesViaGUI-->
+        <member name="M:Tomboy.ExportAllApplicationAddin.ExportNotebookButtonClicked(System.Object,System.EventArgs)">
+             <summary>
+             Called when the user chooses "Export Notebook"
+             (Even when "All Notes or "Unfiled Notes" are
+             selected.)
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.ExportNotesInList(System.Collections.Generic.List{Tomboy.Note},System.String)">
+             <summary>
+             Exports the specified list of notes to *** files in the given folder,
+             excludes template notes.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.ListUnfiledNotes">
+             <summary>
+             Finds all notes without a notebook tag and returns them in a list.
+             </summary>
+            </member>
+        <!--FIXME: Invalid documentation markup was found for member M:Tomboy.ExportAllApplicationAddin.ExportSingleNote(Tomboy.Note,System.String)-->
+        <member name="M:Tomboy.ExportAllApplicationAddin.SanitizeNoteTitle(System.String)">
+             <summary>
+             Removes elements from the note title that might be problematic in a file name.
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.SanitizePath(System.String)">
+             <summary>
+             Makes sure a path doesn't have any illegal characters.
+             </summary>
+            </member>
+        <member name="P:Tomboy.ExportAllApplicationAddin.Initialized">
+             <summary>
+             Return true if the addin is initialized
+             </summary>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.ShowSuccessDialog(System.String)">
+             <summary>
+             Shows a success dialog when export is complete
+             </summary>
+             <param name="detail"> A string with details of the export folder.</param>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.ShowErrorDialog(System.String,Tomboy.ExportMultipleDialog,System.String)">
+             <summary>
+             Shows an error dialog if things go wrong.
+             </summary>
+             <param name="output_folder">
+             A <see cref="T:System.String" /> with the name of the folder
+             that couldn't be exported to.
+             </param>
+             <param name="dialog">
+             The parent <see cref="T:Tomboy.ExportMultipleDialog" />.
+             </param>
+             <param name="error_message">
+             A <see cref="T:System.String" /> with an error description.
+             </param>
+            </member>
+        <member name="M:Tomboy.ExportAllApplicationAddin.ResolveRelativePath(Tomboy.Note,System.String)">
+             <summary>
+             Determines the relative path between two exported files, can optionally be used
+             by the subclass.
+             </summary>
+             <param name="title_from">
+             The note we're finding the relative path from.
+             </param>
+             <param name="title_to">
+             The title of the note we're finding the relative path to.
+             </param>
+             <returns>
+             A <see cref="T:System.String" />
+             </returns>
+            </member>
+        <member name="T:Tomboy.ExportMultipleDialog">
+             <summary>
+             A utility class for choosing where to export to.
+             </summary>
+            </member>
+        <!--FIXME: Invalid documentation markup was found for member T:Tomboy.NoteAddin-->
+        <member name="M:Tomboy.NoteAddin.Initialize">
+             <summary>
+             Called when the NoteAddin is attached to a Note
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteAddin.Shutdown">
+             <summary>
+             Called when a note is deleted and also when
+             the addin is disabled.
+             </summary>
+            </member>
+        <member name="M:Tomboy.NoteAddin.OnNoteOpened">
+             <summary>
+             Called when the note is opened.
+             </summary>
+            </member>
+        <member name="F:Tomboy.AddinManager.app_addins">
+             <summary>
+             Key = TypeExtensionNode.Id
+             </summary>
+            </member>
+        <member name="F:Tomboy.AddinManager.note_addins">
+             <summary>
+             </summary>
+            </member>
+        <member name="F:Tomboy.AddinManager.note_addin_infos">
+             <summary>
+             Key = TypeExtensionNode.Id
+             </summary>
+            </member>
+        <member name="M:Tomboy.AddinManager.GetApplicationAddins">
+             <summary>
+             Returns an array of ApplicationAddin objects
+             </summary>
+            </member>
+        <member name="M:Tomboy.AddinManager.GetNoteAddins">
+             <summary>
+             Returns an array of NoteAddin objects that tomboy
+             currently knows about.
+             </summary>
+            </member>
+        <member name="M:Tomboy.AddinManager.GetPreferenceTabAddins">
+             <summary>
+             Returns an array of PreferenceTabAddin objects.
+             </summary>
+             <returns>
+             A <see cref="T:Tomboy.PreferenceTabAddin" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.AddinManager.GetSyncServiceAddins">
+             <summary>
+             Returns an array of SyncServiceAddin objects
+             </summary>
+            </member>
+        <member name="M:Tomboy.AddinManager.GetAllAddins">
+             <summary>
+             Add the addin to the note and save off a reference to the addin that
+             will be used when the note is deleted.
+             </summary>
+            </member>
+        <member name="M:Tomboy.AddinManager.OnNoteDeleted(System.Object,Tomboy.Note)">
+             <summary>
+             Call NoteAddin.Shutdown () and NoteAddin.Dispose () on every
+             NoteAddin that's attached to the deleted Note.
+             </summary>
+            </member>
+        <member name="M:Tomboy.AddinManager.UpgradeOldAddinConfig">
+             <summary>
+             The purpose of this method is to check for an older config.xml file
+             in an older addin-db-* directory.  If a config.xml is found in an
+             older directory but not in the new addin-db-* directory, config.xml
+             will be copied into the new one.  This addresses a problem found
+             in bug #514931.  While running an older version of Tomboy, if a user
+             enables an addin that's disabled by deafult and then upgrades to a
+             newer Tomboy, the addin could be disabled again (which is what this
+             method attempts to fix).
+             </summary>
+            </member>
+        <member name="M:Tomboy.AddinPreferenceFactory.CreatePreferenceWidget">
+             <summary>
+             Returns a Gtk.Widget that will be placed inside of a Gtk.Dialog
+             when the user chooses to view/set the preferences of an Addin.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.Idle">
+             <summary>
+             The synchronization thread is not running
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.NoConfiguredSyncService">
+             <summary>
+             Indicates that no sync service has been configured
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.SyncServerCreationFailed">
+             <summary>
+             Indicates that SyncServiceAddin.CreateSyncServer () failed
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.Connecting">
+             <summary>
+             Connecting to the server
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.AcquiringLock">
+             <summary>
+             Acquiring the right to be the exclusive sync client
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.Locked">
+             <summary>
+             Another client is currently synchronizing
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.PrepareDownload">
+             <summary>
+             Preparing to download new/updated notes from the server.  This also
+             includes checking for note title name conflicts.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.Downloading">
+             <summary>
+             Downloading notes from the server
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.PrepareUpload">
+             <summary>
+             Checking for files to send to the server
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.Uploading">
+             <summary>
+             Uploading new/changed notes from the client
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.DeleteServerNotes">
+             <summary>
+             Deleting notes from the server
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.CommittingChanges">
+             <summary>
+             Committing Changes to the server
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.Succeeded">
+             <summary>
+             SyncSuccess
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.Failed">
+             <summary>
+             The synchronization failed
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncState.UserCancelled">
+             <summary>
+             The synchronization was cancelled by the user
+             </summary>
+            </member>
+        <member name="T:Tomboy.Sync.SyncStateChangedHandler">
+             <summary>
+             Handle state SyncManager state changes
+             </summary>
+            </member>
+        <member name="T:Tomboy.Sync.NoteSyncHandler">
+             <summary>
+             Handle when notes are uploaded, downloaded, or deleted
+             </summary>
+            </member>
+        <member name="T:Tomboy.Sync.NoteConflictHandler">
+             <summary>
+             Handle a note conflict
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncManager.SynchronizationThread">
+             <summary>
+             The function that does all of the work
+             TODO: Factor some nice methods out of here; this is just garbage to read right now
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncManager.ResolveConflict(Tomboy.Sync.SyncTitleConflictResolution)">
+             <summary>
+             The GUI should call this after having the user resolve a conflict
+             so the synchronization thread can continue.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncManager.State">
+             <summary>
+             The state of the SyncManager (lame comment, duh!)
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncManager.GetConfiguredSyncService">
+             <summary>
+             Read the preferences and load the specified SyncServiceAddin to
+             perform synchronization.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncManager.GetSyncServiceAddin(System.String)">
+             <summary>
+             Return the specified SyncServiceAddin
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncLockInfo.ClientId">
+             <summary>
+             A string to identify which client currently has the
+             lock open.  Not guaranteed to be unique.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncLockInfo.TransactionId">
+             <summary>
+             Unique ID for the sync transaction associated with the lock.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncLockInfo.RenewCount">
+             <summary>
+             Indicates how many times the client has renewed the lock.
+             Subsequent clients should watch this (along with the LockOwner) to
+             determine whether the currently synchronizing client has becomeeither
+             inactive.  Clients currently synchronizing should update the lock
+             file before the duration expires to prevent other clients from
+             overtaking the lock.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncLockInfo.Duration">
+             <summary>
+             A TimeSpan to indicate how long the current synchronization will
+             take.  If the current synchronization will take longer than this,
+             the client synchronizing should update the lock file to indicate
+             this.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncLockInfo.Revision">
+             <summary>
+             Specifies the current revision that this lock is for.  The client
+             that lays the lock file down should specify which revision they're
+             creating.  Clients needing to perform cleanup may want to know which
+             revision files to clean up by reading the value of this.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncLockInfo.HashString">
+             <summary>
+             The point of this property is to let clients quickly know if a sync
+             lock has changed.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncUtils.guisuTool">
+             <summary>
+             Tool used to execute a process as root user by prompting the user
+             for the root password.
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncUtils.lsmodTool">
+             <summary>
+             Tool used to query what kernel modules are enabled
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncUtils.modprobeTool">
+             <summary>
+             Tool used to enable a kernel module
+             </summary>
+            </member>
+        <member name="F:Tomboy.Sync.SyncUtils.commonPaths">
+             <summary>
+             Common places where tools might be found, in case
+             $PATH is not set up as expected.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncUtils.ToolsValid">
+             <summary>
+             Indicates that all tools needed by this class were found.
+             Not all methods require all tools, though.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncUtils.IsFuseEnabled">
+             <summary>
+             Checks /proc/filesystems to check for fuse in the output
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncUtils.EnableFuse">
+             <summary>
+             Enable fuse.  This requires root access.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncUtils.FindFirstExecutableInPath(System.String[])">
+             <summary>
+             Search in $PATH and a few other common locations for the
+             given executables.  Return full executable path
+             of first executable found.  If none found, return null.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.TomboySyncClient.DeletedNoteTitles">
+             <summary>
+             Return a dictionary keyed on deleted note GUIDs, where
+             the value is the note title.  This list may have obsolete
+             entries.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.TomboySyncClient.Reset">
+             <summary>
+             Client info is no good, delete manifest and start over.
+             </summary>
+            </member>
+        <!--FIXME: Invalid documentation markup was found for member P:Tomboy.Sync.TomboySyncClient.AssociatedServerId-->
+        <member name="M:Tomboy.Sync.FileSystemSyncServer.CleanupOldSync(Tomboy.Sync.SyncLockInfo)">
+             <summary>
+             This method is used when the sync lock file is determined to be out
+             of date.  It will check to see if the manifest.xml file exists and
+             check whether it is valid (must be a valid XML file).
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.FileSystemSyncServer.IsValidXmlFile(System.String)">
+             <summary>
+             Check that xmlFilePath points to an existing valid XML file.
+             This is done by ensuring that an XmlDocument can be created from
+             its contents.
+            </summary>
+            </member>
+        <!--FIXME: Invalid documentation markup was found for member T:Tomboy.Sync.SyncServiceAddin-->
+        <member name="M:Tomboy.Sync.SyncServiceAddin.CreateSyncServer">
+             <summary>
+             Creates a SyncServer instance that the SyncManager can use to
+             synchronize with this service.  This method is called during
+             every synchronization process.  If the same SyncServer object
+             is returned here, it should be reset as if it were new.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncServiceAddin.CreatePreferencesControl(System.EventHandler)">
+             <summary>
+             Creates a Gtk.Widget that's used to configure the service.  This
+             will be used in the Synchronization Preferences.  Preferences should
+             not automatically be saved by a GConf Property Editor.  Preferences
+             should be saved when SaveConfiguration () is called. requiredPrefChanged
+             should be called when a required setting is changed.
+             </summary>
+             <param name="requiredPrefChanged">Delegate to be called when a required preference is changed</param>
+            </member>
+        <member name="M:Tomboy.Sync.SyncServiceAddin.SaveConfiguration">
+             <summary>
+             The Addin should verify and check the connection to the service
+             when this is called.  If verification and connection is successful,
+             the addin should save the configuration and return true.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Sync.SyncServiceAddin.ResetConfiguration">
+             <summary>
+             Reset the configuration so that IsConfigured will return false.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncServiceAddin.IsConfigured">
+             <summary>
+             Returns whether the addin is configured enough to actually be used.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncServiceAddin.AreSettingsValid">
+             <summary>
+             Returns true if required settings are valid in the widget
+             (Required setings are non-empty)
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncServiceAddin.Name">
+             <summary>
+             The name that will be shown in the preferences to distinguish
+             between this and other SyncServiceAddins.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncServiceAddin.Id">
+             <summary>
+             Specifies a unique identifier for this addin.  This will be used to
+             set the service in preferences.
+             </summary>
+            </member>
+        <member name="P:Tomboy.Sync.SyncServiceAddin.IsSupported">
+             <summary>
+             Returns true if the addin has all the supporting libraries installed
+             on the machine or false if the proper environment is not available.
+             If false, the preferences dialog will still call
+             CreatePreferencesControl () when the service is selected.  It's up
+             to the addin to present the user with what they should install/do so
+             IsSupported will be true.
+             </summary>
+            </member>
+        <member name="M:Tomboy.Search.SearchNotes(System.String,System.Boolean,Tomboy.Notebooks.Notebook)">
+             <summary>
+             Search the notes! A match number of
+             <see cref="F:System.Int32.MaxValue" /> indicates that the note
+             title contains the search term.
+             </summary>
+             <param name="query">
+             A <see cref="T:System.String" />
+             </param>
+             <param name="case_sensitive">
+             A <see cref="T:System.Boolean" />
+             </param>
+             <param name="selected_notebook">
+             A <see cref="T:Tomboy.Notebooks.Notebook" />.  If this is not
+             null, only the notes of the specified notebook will
+             be searched.
+             </param>
+             <returns>
+             A <see cref="!:IDictionary`2" /> with the relevant Notes
+             and a match number. If the search term is in the title,
+             number will be <see cref="F:System.Int32.MaxValue" />.
+             </returns>
+            </member>
+        <member name="T:Tomboy.Notebooks.Notebook">
+             <summary>
+             An object that represents a notebook in Tomboy
+             </summary>
+            </member>
+        <member name="M:Tomboy.Notebooks.Notebook.#ctor(System.String)">
+             <summary>
+             Construct a new Notebook with a given name
+             </summary>
+             <param name="name">
+             A <see cref="T:System.String" />.  This is the name that will be used
+             to identify the notebook.
+             </param>
+            </member>
+        <member name="M:Tomboy.Notebooks.Notebook.#ctor(Tomboy.Tag)">
+             <summary>
+             Construct a new Notebook with the specified notebook system tag.
+             </summary>
+             <param name="notebookTag">
+             A <see cref="T:Tomboy.Tag" />.  This must be a system notebook tag.
+             </param>
+            </member>
+        <member name="M:Tomboy.Notebooks.Notebook.#ctor">
+             <summary>
+             Default constructor not used
+             </summary>
+            </member>
+        <member name="M:Tomboy.Notebooks.Notebook.GetTemplateNote">
+             <summary>
+             Return the template Tomboy Note that corresponds with
+             this Notebook.
+             </summary>
+             <returns>
+             A <see cref="T:Tomboy.Note" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.Notebook.ContainsNote(Tomboy.Note)">
+             <summary>
+             Returns true when the specified note exists in the notebook
+             </summary>
+             <param name="note">
+             A <see cref="T:Tomboy.Note" />
+             </param>
+             <returns>
+             A <see cref="T:System.Boolean" />
+             </returns>
+            </member>
+        <member name="T:Tomboy.Notebooks.SpecialNotebook">
+             <summary>
+             A notebook of this type is special in the sense that it
+             will not normally be displayed to the user as a notebook
+             but it's used in the Search All Notes Window for special
+             filtering of the notes.
+             </summary>
+            </member>
+        <member name="T:Tomboy.Notebooks.AllNotesNotebook">
+             <summary>
+             A special notebook that represents really "no notebook" as
+             being selected.  This notebook is used in the Search All
+             Notes Window to allow users to select it at the top of the
+             list so that all notes are shown.
+             </summary>
+            </member>
+        <member name="T:Tomboy.Notebooks.UnfiledNotesNotebook">
+             <summary>
+             A special notebook that represents a notebook with notes
+             that are not filed.  This is used in the Search All Notes
+             Window to filter notes that are not placed in any notebook.
+             </summary>
+            </member>
+        <member name="T:Tomboy.Notebooks.NotebookManager">
+             <summary>
+             A convenience class for dealing with Notebooks in Tomboy
+             </summary>
+            </member>
+        <member name="P:Tomboy.Notebooks.NotebookManager.NotebooksWithSpecialItems">
+             <summary>
+             A Gtk.TreeModel that contains all of the items in the
+             NotebookManager TreeStore including SpecialNotebooks
+             which are used in the "Search All Notes" window.
+             </summary>
+             <param name="notebookName">
+             A <see cref="T:System.String" />
+             </param>
+             <returns>
+             A <see cref="T:Tomboy.Notebooks.Notebook" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.DeleteNotebook(Tomboy.Notebooks.Notebook)">
+             <summary>
+             Delete the specified notebook from the system
+             </summary>
+             <param name="notebook">
+             A <see cref="T:Tomboy.Notebooks.Notebook" />
+             </param>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.GetNotebookIter(Tomboy.Notebooks.Notebook,Gtk.TreeIter@)">
+             <summary>
+             Returns the Gtk.TreeIter that points to the specified Notebook.
+             </summary>
+             <param name="notebook">
+             A <see cref="T:Tomboy.Notebooks.Notebook" />
+             </param>
+             <param name="iter">
+             A <see cref="T:Gtk.TreeIter" />.  Will be set to a valid iter if
+             the specified notebook is found.
+             </param>
+             <returns>
+             A <see cref="T:System.Boolean" />.  True if the specified notebook
+             was found, false otherwise.
+             </returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.GetNotebookFromNote(Tomboy.Note)">
+             <summary>
+             Returns the Notebook associated with this note or null
+             if no notebook exists.
+             </summary>
+             <param name="note">
+             A <see cref="T:Tomboy.Note" />
+             </param>
+             <returns>
+             A <see cref="T:Tomboy.Notebooks.Notebook" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.GetNotebookFromTag(Tomboy.Tag)">
+             <summary>
+             Returns the Notebook associated with the specified tag
+             or null if the Tag does not represent a notebook.
+             </summary>
+             <param name="tag">
+             A <see cref="T:Tomboy.Tag" />
+             </param>
+             <returns>
+             A <see cref="T:Tomboy.Notebooks.Notebook" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.IsNotebookTag(Tomboy.Tag)">
+             <summary>
+             Evaluates the specified tag and returns <value>true</value>
+             if it's a tag which represents a notebook.
+             </summary>
+             <param name="tag">
+             A <see cref="T:Tomboy.Tag" />
+             </param>
+             <returns>
+             A <see cref="T:System.Boolean" />
+             </returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.PromptCreateNewNotebook(Gtk.Window)">
+             <summary>
+             Prompt the user to create a new notebook
+             </summary>
+             <param name="parent">
+             A <see cref="T:Gtk.Window" /> that will be used in the child dialog or
+             null if none is available.
+             </param>
+             <returns>If successful, returns the newly created notebook.</returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.PromptCreateNewNotebook(Gtk.Window,System.Collections.Generic.List{Tomboy.Note})">
+             <summary>
+             Prompt the user to create a new notebook and if successful, move
+             the notes specified in the notesToAdd list into the new notebook.
+             </summary>
+             <param name="parent">
+             A <see cref="T:Gtk.Window" />
+             </param>
+             <param name="notesToAdd">
+             A <see cref="!:List`1" /> of notes that should be added to the new
+             notebook.
+             </param>
+             <returns>
+             The newly created <see cref="T:Tomboy.Notebooks.Notebook" /> if successful or null
+             if there was a problem.
+             </returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.PromptDeleteNotebook(Gtk.Window,Tomboy.Notebooks.Notebook)">
+             <summary>
+             Prompt the user and delete the notebok (if they say so).
+             </summary>
+             <param name="parent">
+             A <see cref="T:Gtk.Window" />
+             </param>
+             <param name="notebook">
+             A <see cref="T:Tomboy.Notebooks.Notebook" />
+             </param>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.MoveNoteToNotebook(Tomboy.Note,Tomboy.Notebooks.Notebook)">
+             <summary>
+             Place the specified note into the specified notebook.  If the
+             note already belongs to a notebook, it will be removed from that
+             notebook first.
+             </summary>
+             <param name="note">
+             A <see cref="T:Tomboy.Note" />
+             </param>
+             <param name="notebook">
+             A <see cref="T:Tomboy.Notebooks.Notebook" />.  If Notebook is null, the note will
+             be removed from its current notebook.
+             </param>
+             <returns>True if the note was successfully moved.</returns>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.LoadNotebooks">
+             <summary>
+             Loop through the system tags looking for notebooks
+             </summary>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookManager.FilterNotebooks(Gtk.TreeModel,Gtk.TreeIter)">
+             <summary>
+             Filter out SpecialNotebooks from the model
+             </summary>
+            </member>
+        <member name="M:Tomboy.Notebooks.NotebookApplicationAddin.OnTagAdded(Tomboy.Note,Tomboy.Tag)">
+             <summary>
+             Handle the addition of note tags through programmatic means,
+             such as note sync or the dbus remote control.
+             </summary>
+            </member>
+        <member name="T:Tomboy.PreferenceTabAddin">
+             <summary>
+             Implement this interface to provide a new tab in
+             Tomboy's Preferences Dialog.  If you are writing
+             a standard add-in, DO NOT ABUSE THIS (you should
+             normally extend the /Tomboy/AddinPreferences
+             extension point).
+             </summary>
+            </member>
+        <member name="M:Tomboy.PreferenceTabAddin.GetPreferenceTabWidget(Tomboy.PreferencesDialog,System.String@,Gtk.Widget@)">
+             <summary>
+             Returns a Gtk.Widget to place in a new tab in Tomboy's
+             preferences dialog.
+             <param name="parent">The preferences dialog.  Add-ins should
+             use this for connecting to Hidden or other events as needed.
+             Another use would be to pop open dialogs, so they can properly
+             set their parent.
+             </param>
+             <param name="tabLabel">The string to be used in the tab's
+             label.</param>
+             <param name="preferenceWidget">The Gtk.Widget to use as the
+             content of the tab page.</param>
+             <returns>Returns <value>true</value> if the widget is
+             valid/created or <value>false</value> otherwise.</returns>
+             </summary>
+            </member>
+    </members>
+</doc>
