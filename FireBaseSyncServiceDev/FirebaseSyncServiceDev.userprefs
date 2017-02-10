@@ -1,14 +1,16 @@
 ﻿<Properties StartupItem="FirebaseSyncServiceDev.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Api/FirebaseNoteObject.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FireSharpSimple/Response/EventRootResponse.cs">
     <Files>
-      <File FileName="FirebaseSyncServer.cs" Line="1" Column="1" />
-      <File FileName="Utils.cs" Line="1" Column="1" />
-      <File FileName="FirebaseSyncServiceAddin.cs" Line="1" Column="1" />
-      <File FileName="FirebaseSyncService.addin.xml" Line="1" Column="1" />
-      <File FileName="NoteConvert.cs" Line="118" Column="14" />
-      <File FileName="Api/FirebaseNoteObject.cs" Line="170" Column="9" />
-      <File FileName="Api/ResourceReference.cs" Line="61" Column="1" />
+      <File FileName="Api/FirebaseNoteObject.cs" Line="1" Column="1" />
+      <File FileName="FireSharpSimple/Response/EventStreamResponse.cs" Line="14" Column="26" />
+      <File FileName="FireSharpSimple/Response/PushResponse.cs" Line="1" Column="1" />
+      <File FileName="FireSharpSimple/Response/FirebaseResponse.cs" Line="1" Column="1" />
+      <File FileName="FireSharpSimple/Response/SetResponse.cs" Line="1" Column="1" />
+      <File FileName="FireSharpSimple/Response/EventRootResponse.cs" Line="73" Column="50" />
+      <File FileName="FireSharpSimple/AutoRedirectHttpClientHandler.cs" Line="1" Column="1" />
+      <File FileName="FireSharpSimple/FirebaseClient.cs" Line="1" Column="1" />
+      <File FileName="FireSharpSimple/Config/FirebaseConfig.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
