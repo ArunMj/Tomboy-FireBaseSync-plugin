@@ -2,7 +2,7 @@
 using System.Net;
 using System.Runtime.Serialization;
 
-namespace FireSharpSimple
+namespace FireSharpSimple.Response
 {
     public class PushResponse : FirebaseResponse
     {

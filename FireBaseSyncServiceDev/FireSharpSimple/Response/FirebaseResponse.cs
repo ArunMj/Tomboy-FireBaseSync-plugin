@@ -1,7 +1,7 @@
 ﻿using FireSharpSimple.Extensions;
 using System.Net;
 
-namespace FireSharpSimple
+namespace FireSharpSimple.Response
 {
     public class FirebaseResponse
     {

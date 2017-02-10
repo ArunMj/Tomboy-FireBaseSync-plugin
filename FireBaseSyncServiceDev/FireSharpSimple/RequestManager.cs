@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FireSharpSimple.Exceptions;
 using FireSharpSimple.Interfaces;
 
-namespace FireSharpSimple.Response
+namespace FireSharpSimple
 {
     internal class RequestManager : IRequestManager
     {

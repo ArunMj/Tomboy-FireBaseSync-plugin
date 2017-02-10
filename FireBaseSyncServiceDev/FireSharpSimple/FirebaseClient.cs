@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace FireSharpSimple.Response
+namespace FireSharpSimple
 {
     public class FirebaseClient : IFirebaseClient, IDisposable
     {

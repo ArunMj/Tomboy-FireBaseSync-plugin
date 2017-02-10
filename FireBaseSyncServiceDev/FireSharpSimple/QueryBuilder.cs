@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FireSharpSimple.Response
+namespace FireSharpSimple
 {
     public class QueryBuilder
     {
