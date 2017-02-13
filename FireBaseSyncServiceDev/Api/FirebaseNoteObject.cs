@@ -85,7 +85,7 @@ namespace Tomboy.FirebaseAddin.Api
         /// Tos the update object.
         /// </summary>
         /// <returns>The update object.</returns>
-        public Hyena.Json.JsonObject ToJson (){
+        public Hyena.Json.JsonObject ToJsonObj (){
             Hyena.Json.JsonObject noteUpdateObj =
                 new Hyena.Json.JsonObject ();
 

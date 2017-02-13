@@ -20,8 +20,18 @@
     <ConsolePause>false</ConsolePause>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="cp -nrv  ${ProjectDir}/libs/.   ${TargetDir}" workingdir="${TargetDir}" />
-        <Command type="Custom" name="Run in Tomboy" command="mono Tomboy.exe --debug  --note-path notestore" workingdir="${TargetDir}" pauseExternalConsole="True" />
+        <Command>
+          <type>AfterBuild</type>
+          <command>cp -nrv  ${ProjectDir}/libs/.   ${TargetDir}</command>
+          <workingdir>${TargetDir}</workingdir>
+        </Command>
+        <Command>
+          <type>Custom</type>
+          <name>Run in Tomboy</name>
+          <command>mono Tomboy.exe --debug  --note-path notestore</command>
+          <workingdir>${TargetDir}</workingdir>
+          <pauseExternalConsole>True</pauseExternalConsole>
+        </Command>
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
@@ -38,12 +48,17 @@
     <Reference Include="Tomboy">
       <HintPath>libs\Tomboy.exe</HintPath>
     </Reference>
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Hyena.Json">
-      <HintPath>libs\Hyena.Json.dll</HintPath>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>glib-sharp-2.0</Package>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-2.0</Package>
     </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
@@ -74,7 +89,17 @@
     <Compile Include="FireSharpSimple\Response\FirebaseResponse.cs" />
     <Compile Include="FireSharpSimple\Response\PushResponse.cs" />
     <Compile Include="FireSharpSimple\Response\SetResponse.cs" />
-    <Compile Include="Api\FirebaseTalker.cs" />
+    <Compile Include="Api\FirebaseTranspoter.cs" />
+    <Compile Include="Api\ConnectionProps.cs" />
+    <Compile Include="Hyena.json\Deserializer.cs" />
+    <Compile Include="Hyena.json\IJsonCollection.cs" />
+    <Compile Include="Hyena.json\JsonArray.cs" />
+    <Compile Include="Hyena.json\JsonObject.cs" />
+    <Compile Include="Hyena.json\MyClass.cs" />
+    <Compile Include="Hyena.json\Serializer.cs" />
+    <Compile Include="Hyena.json\Token.cs" />
+    <Compile Include="Hyena.json\TokenType.cs" />
+    <Compile Include="Hyena.json\Tokenizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

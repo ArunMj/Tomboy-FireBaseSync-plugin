@@ -4,13 +4,27 @@ using Tomboy.Sync;
 using System.Collections.Generic;
 using System.Collections;
 using Atk;
-
+using Tomboy.FirebaseAddin.Api;
 namespace Tomboy.FirebaseAddin
 {
     public class FirebaseSyncServer: SyncServer
     {
-        public FirebaseSyncServer (){
-            //throw new Exception ("dshjfdsjhfjdgfjhgdjhg");
+		private FirebaseTranspoter fbTransporter;
+		private List<FirebaseNoteObject> notesToBeUploaded;
+		private List<String> guidsMarkedForDeletion;
+
+		public FirebaseSyncServer()
+		{
+            ConnectionProps connectionProps = new ConnectionProps
+            {
+                // for testing
+                FirebaseUrl = "https://helloworld-31af0.firebaseio.com",   
+            };
+            fbTransporter = new FirebaseTranspoter(connectionProps);
+		}
+		public FirebaseSyncServer (ConnectionProps connectionProps){
+			//throw new Exception ("dshjfdsjhfjdgfjhgdjhg");
+			fbTransporter = new FirebaseTranspoter(connectionProps);
         }
 
         #region SyncServer interface implementation 
@@ -45,6 +59,8 @@ namespace Tomboy.FirebaseAddin
         /// <returns><c>true</c>, if sync transaction was begun, <c>false</c> otherwise.</returns>
         public bool BeginSyncTransaction (){
             //TODO
+            notesToBeUploaded = new List<FirebaseNoteObject>();
+            guidsMarkedForDeletion = new List<string>();
             Logger.Debug("** firebasesync txn begun ");
             return true;
         }
@@ -66,11 +82,16 @@ namespace Tomboy.FirebaseAddin
         public bool CommitSyncTransaction (){
             //TODO
             Logger.Debug("** Committing direbase sync txn");
+            fbTransporter.upload(this.notesToBeUploaded);
             return true;
         }
 
         public void DeleteNotes (IList<string> deletedNoteUUIDs){
             Logger.Debug("** Deleting notes from server, uuids : " + Utils.str(deletedNoteUUIDs));
+			foreach (string uuid in deletedNoteUUIDs)
+			{
+				guidsMarkedForDeletion.Add(uuid);
+			}
         }
 
         /// <summary>
@@ -79,9 +100,10 @@ namespace Tomboy.FirebaseAddin
         /// <returns>The all note UUI ds.</returns>
         public IList<string> GetAllNoteUUIDs (){
             //TODO
-            List<string> uuids = new  List<string>() {"e9e5feb6-bfeb-41f3-b245-2f2c5af6f769","dddddddddddddddddddd"};
-            Logger.Debug("** Got all uuids from server : uuids: " + Utils.str(uuids));
-            return uuids;
+            Logger.Debug("** Got all uuids from server : uuids: ");
+            List<string> uids = fbTransporter.uidsInserver();
+
+            return uids;
         }
 
        
@@ -91,21 +113,21 @@ namespace Tomboy.FirebaseAddin
             return new Dictionary<string, NoteUpdate>();
         }
 
-        public bool UpdatesAvailableSince (int revision){
-            //TODO
+		public bool UpdatesAvailableSince(int revision){
+			//TODO
 			Logger.Debug("** checking updateAvailableSince " + revision.ToString());
-            return false;
-        }
+			return false;
+		}
 
         public void UploadNotes (IList<Note> notes){
             //TODO
             Logger.Debug("** Upload notes to server, Notes: " + Utils.str(notes,x=>((Note)x).Id));
-            foreach(Note note in notes ){
-                Console.WriteLine("-------------"
-                    
-                );
-                NoteConvert.ToFirebaseNoteObject(note).ToJson().Dump();
-            }
+			foreach (Note note in notes)
+			{
+				FirebaseNoteObject fn = NoteConvert.ToFirebaseNoteObject(note);
+				Console.WriteLine("  # -  " + fn.Title);
+				notesToBeUploaded.Add(fn);
+			}
         }
 
         #endregion
