@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using FireSharpSimple;
+using Gtk;
 
 namespace Tomboy.FirebaseAddin.Api
 {
@@ -17,7 +18,6 @@ namespace Tomboy.FirebaseAddin.Api
             });
 		}
         public void UploadToServer(List<FirebaseNoteObject> fnotes){
-            //Console.Write (Utils.str (fnotes));Console .WriteLine (fnotes.Count);
             if(fnotes.Count == 0){
                 Logger.Info (" *** No notes to upload.  :-(   ");
                 return;
@@ -30,18 +30,18 @@ namespace Tomboy.FirebaseAddin.Api
 
             seril.SetInput(consolidated);
 
-            Console.WriteLine("$$$ UPDATE : " + seril.Serialize());
+            Logger.Debug("$$$ UPDATE@UploadToServer: " + seril.Serialize());
             var r = fbc.Update("tomboynotes",seril.Serialize());
-            Console.WriteLine (" $$$ GOT : " + r.Body);
+            Logger.Debug ("$$$ GOT@UploadToServer : " + r.Body);
         }
 
-        public List<string> getUidsFromServer (){
+        public List<string> GetUidsFromServer (){
             String resp = fbc.Get("tomboynotes",QueryBuilder.New().Shallow(true)).Body;
             if (resp.Trim() == "null"){
                 Logger.Info ("*** No notes/guids found in server");
                 return new List<string>();
             }
-            Console.WriteLine("$$$ GOT :" + resp);
+            Logger.Debug("$$$ [GOT]@GetUidsFromServer :" + resp);
             dese.SetInput(resp);
             Hyena.Json.JsonObject uidDict = (Hyena.Json.JsonObject)dese.Deserialize();
             var keysCol = uidDict.Keys;
@@ -50,14 +50,18 @@ namespace Tomboy.FirebaseAddin.Api
         }
 
         public void DeleteFromSerever(List<String> guids){
+            if (guids.Count == 0) {
+                Logger.Info (" *** No notes to delete in server.  :-|   ");
+                return;
+            }
             Hyena.Json.JsonObject dele = new Hyena.Json.JsonObject ();
             foreach (var guid in guids) {
                 dele.Add (guid, null);
             }
             seril.SetInput (dele);
-            Console.WriteLine ("$$$ UPDATE : " + seril.Serialize ());
+            Logger.Debug ("$$$ UPDATE@DeleteFromSerever : " + seril.Serialize ());
             var r = fbc.Update ("tomboynotes", seril.Serialize ());
-            Console.WriteLine (" $$$ GOT : " + r.Body);
+            Logger.Debug ("$$$ GOT@DeleteFromSerever : " + r.Body);
         }
 	}
 }

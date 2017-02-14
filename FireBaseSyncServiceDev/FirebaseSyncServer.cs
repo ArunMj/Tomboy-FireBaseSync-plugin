@@ -88,7 +88,7 @@ namespace Tomboy.FirebaseAddin
         }
 
         public void DeleteNotes (IList<string> deletedNoteUUIDs){
-            Logger.Debug(" *** DELETENOTES, uuids : " + Utils.str(deletedNoteUUIDs));
+            Logger.Debug(" *** DELETENOTES  (uuids): " + Utils.str(deletedNoteUUIDs));
 			foreach (string uuid in deletedNoteUUIDs)
 			{
 				guidsMarkedForDeletion.Add(uuid);
@@ -101,9 +101,8 @@ namespace Tomboy.FirebaseAddin
         /// <returns>The all note UUI ds.</returns>
         public IList<string> GetAllNoteUUIDs (){
             //TODO
-            Logger.Debug(" ***  GETALLNOTEUUIDS : response --");
-            List<string> uids = fbTransporter.getUidsFromServer();
-            //Console.WriteLine (Utils.str (uids));
+            Logger.Debug(" ***  GETALLNOTEUUIDS () : response --");
+            List<string> uids = fbTransporter.GetUidsFromServer();
             return uids;
         }
 
@@ -122,11 +121,10 @@ namespace Tomboy.FirebaseAddin
 
         public void UploadNotes (IList<Note> notes){
             //TODO
-            Logger.Debug(" ***  UPLOADNOTES, Notes: " + Utils.str(notes,x=>((Note)x).Id));
+            Logger.Debug(" ***  UPLOADNOTES(" + Utils.str(notes,x=>((Note)x).Id+"["+((Note)x).Title+"]")+" )");
 			foreach (Note note in notes)
 			{
 				FirebaseNoteObject fn = NoteConvert.ToFirebaseNoteObject(note);
-				Console.WriteLine("  # -  " + fn.Title);
 				notesToBeUploaded.Add(fn);
 			}
         }
