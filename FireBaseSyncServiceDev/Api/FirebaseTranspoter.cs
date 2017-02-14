@@ -16,7 +16,12 @@ namespace Tomboy.FirebaseAddin.Api
                 BasePath = conProps.FirebaseUrl
             });
 		}
-        public void upload(List<FirebaseNoteObject> fnotes){
+        public void UploadToServer(List<FirebaseNoteObject> fnotes){
+            //Console.Write (Utils.str (fnotes));Console .WriteLine (fnotes.Count);
+            if(fnotes.Count == 0){
+                Logger.Info (" *** No notes to upload.  :-(   ");
+                return;
+            }
             Hyena.Json.JsonObject consolidated = new Hyena.Json.JsonObject();
 
             foreach(FirebaseNoteObject fn in fnotes){
@@ -25,23 +30,34 @@ namespace Tomboy.FirebaseAddin.Api
 
             seril.SetInput(consolidated);
 
-            Console.WriteLine(seril.Serialize());
-            fbc.Update("tomboynotes",seril.Serialize());
+            Console.WriteLine("$$$ UPDATE : " + seril.Serialize());
+            var r = fbc.Update("tomboynotes",seril.Serialize());
+            Console.WriteLine (" $$$ GOT : " + r.Body);
         }
 
-        public List<string> uidsInserver (){
+        public List<string> getUidsFromServer (){
             String resp = fbc.Get("tomboynotes",QueryBuilder.New().Shallow(true)).Body;
             if (resp.Trim() == "null"){
+                Logger.Info ("*** No notes/guids found in server");
                 return new List<string>();
             }
-            Console.WriteLine(resp);
+            Console.WriteLine("$$$ GOT :" + resp);
             dese.SetInput(resp);
-            Hyena.Json.JsonObject uuidict = (Hyena.Json.JsonObject)dese.Deserialize();
-            uuidict.Dump();
-            var keysCol = uuidict.Keys;
+            Hyena.Json.JsonObject uidDict = (Hyena.Json.JsonObject)dese.Deserialize();
+            var keysCol = uidDict.Keys;
             var keysList = new List<String>(keysCol);
             return keysList;
-           // uuidict.
+        }
+
+        public void DeleteFromSerever(List<String> guids){
+            Hyena.Json.JsonObject dele = new Hyena.Json.JsonObject ();
+            foreach (var guid in guids) {
+                dele.Add (guid, null);
+            }
+            seril.SetInput (dele);
+            Console.WriteLine ("$$$ UPDATE : " + seril.Serialize ());
+            var r = fbc.Update ("tomboynotes", seril.Serialize ());
+            Console.WriteLine (" $$$ GOT : " + r.Body);
         }
 	}
 }

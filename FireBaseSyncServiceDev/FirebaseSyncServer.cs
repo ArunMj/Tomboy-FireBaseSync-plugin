@@ -40,13 +40,13 @@ namespace Tomboy.FirebaseAddin
 
         public string Id {
             //TODO
-			get;//{Logger.Debug ("***** 	asking ID propery ****");}
+			get;//{Logger.Debug (" ***  *** * 	asking ID propery  ***  *** ");}
         }
 
 		// NOTE: Only reliable during a transaction
         public int LatestRevision {
             //TODO
-			get;//{	Logger.Debug ("***** 	LatestRevision propery ****");}
+			get;//{	Logger.Debug (" ***  *** * 	LatestRevision propery  ***  *** ");}
         }
 
         //
@@ -58,10 +58,9 @@ namespace Tomboy.FirebaseAddin
         /// </summary>
         /// <returns><c>true</c>, if sync transaction was begun, <c>false</c> otherwise.</returns>
         public bool BeginSyncTransaction (){
-            //TODO
             notesToBeUploaded = new List<FirebaseNoteObject>();
             guidsMarkedForDeletion = new List<string>();
-            Logger.Debug("** firebasesync txn begun ");
+            Logger.Debug(" ***  BEGINSYNCTRANSACTION");
             return true;
         }
 
@@ -70,8 +69,9 @@ namespace Tomboy.FirebaseAddin
         /// </summary>
         /// <returns><c>true</c> if this instance cancel sync transaction; otherwise, <c>false</c>.</returns>
         public bool CancelSyncTransaction (){
-            //TODO
-            Logger.Debug("** Cancelling firebase sync txn");
+            Logger.Debug(" ***  CANCELSYNCTRANSACTION");
+            notesToBeUploaded.Clear ();
+            guidsMarkedForDeletion.Clear();
             return false;
         }
 
@@ -81,13 +81,14 @@ namespace Tomboy.FirebaseAddin
         /// <returns><c>true</c>, if sync transaction was commited successfully, <c>false</c> otherwise.</returns>
         public bool CommitSyncTransaction (){
             //TODO
-            Logger.Debug("** Committing direbase sync txn");
-            fbTransporter.upload(this.notesToBeUploaded);
+            Logger.Debug(" ***  COMMITSYNCTRANSACTION");
+            fbTransporter.UploadToServer(this.notesToBeUploaded);
+            fbTransporter.DeleteFromSerever (guidsMarkedForDeletion);
             return true;
         }
 
         public void DeleteNotes (IList<string> deletedNoteUUIDs){
-            Logger.Debug("** Deleting notes from server, uuids : " + Utils.str(deletedNoteUUIDs));
+            Logger.Debug(" *** DELETENOTES, uuids : " + Utils.str(deletedNoteUUIDs));
 			foreach (string uuid in deletedNoteUUIDs)
 			{
 				guidsMarkedForDeletion.Add(uuid);
@@ -100,28 +101,28 @@ namespace Tomboy.FirebaseAddin
         /// <returns>The all note UUI ds.</returns>
         public IList<string> GetAllNoteUUIDs (){
             //TODO
-            Logger.Debug("** Got all uuids from server : uuids: ");
-            List<string> uids = fbTransporter.uidsInserver();
-
+            Logger.Debug(" ***  GETALLNOTEUUIDS : response --");
+            List<string> uids = fbTransporter.getUidsFromServer();
+            //Console.WriteLine (Utils.str (uids));
             return uids;
         }
 
        
         public IDictionary<string, NoteUpdate> GetNoteUpdatesSince (int revision){
             //TODO
-			Logger.Debug("** gets GetNoteUpdatesSince " + revision.ToString());
+            Logger.Debug(String.Format (" ***  GETNOTEUPDATESSINCE ({0})",revision));
             return new Dictionary<string, NoteUpdate>();
         }
 
 		public bool UpdatesAvailableSince(int revision){
 			//TODO
-			Logger.Debug("** checking updateAvailableSince " + revision.ToString());
+            Logger.Debug(String.Format (" ***  UPDATESAVAILABLESINCE ({0})",revision));
 			return false;
 		}
 
         public void UploadNotes (IList<Note> notes){
             //TODO
-            Logger.Debug("** Upload notes to server, Notes: " + Utils.str(notes,x=>((Note)x).Id));
+            Logger.Debug(" ***  UPLOADNOTES, Notes: " + Utils.str(notes,x=>((Note)x).Id));
 			foreach (Note note in notes)
 			{
 				FirebaseNoteObject fn = NoteConvert.ToFirebaseNoteObject(note);
