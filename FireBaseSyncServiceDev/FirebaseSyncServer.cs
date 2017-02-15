@@ -82,7 +82,7 @@ namespace Tomboy.FirebaseAddin
         public bool CommitSyncTransaction (){
             //TODO
             Logger.Debug(" ***  COMMITSYNCTRANSACTION");
-            fbTransporter.UploadToServer(this.notesToBeUploaded);
+            fbTransporter.UploadToServer(this.notesToBeUploaded,5);
             fbTransporter.DeleteFromSerever (guidsMarkedForDeletion);
             return true;
         }
@@ -110,7 +110,18 @@ namespace Tomboy.FirebaseAddin
         public IDictionary<string, NoteUpdate> GetNoteUpdatesSince (int revision){
             //TODO
             Logger.Debug(String.Format (" ***  GETNOTEUPDATESSINCE ({0})",revision));
-            return new Dictionary<string, NoteUpdate>();
+            Dictionary<string, NoteUpdate> updates =
+                new Dictionary<string, NoteUpdate> ();
+            var serverNotes = fbTransporter.DownloadNotes (revision);
+            foreach (var fn  in serverNotes) {
+                string noteXml = NoteConvert.ToNoteXml(fn);
+                NoteUpdate update = new NoteUpdate (noteXml,
+                                                    fn.Title,
+                                                    fn.Guid,
+                                                    fn.LastSyncRevision.Value);
+                updates.Add (fn.Guid, update);
+            }
+            return updates;
         }
 
 		public bool UpdatesAvailableSince(int revision){

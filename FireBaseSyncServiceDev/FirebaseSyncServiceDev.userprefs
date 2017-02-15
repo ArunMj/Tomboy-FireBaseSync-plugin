@@ -1,9 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workbench ActiveDocument="Api/FirebaseTranspoter.cs">
     <Files>
-      <File FileName="Api/FirebaseTranspoter.cs" Line="26" Column="13" />
-      <File FileName="FirebaseSyncServer.cs" Line="86" Column="68" />
-      <File FileName="FireSharpSimple/FirebaseClient.cs" Line="138" Column="88" />
+      <File FileName="Api/FirebaseTranspoter.cs" Line="36" Column="15" />
+      <File FileName="FirebaseSyncServer.cs" Line="105" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
