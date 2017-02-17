@@ -9,6 +9,8 @@ namespace Tomboy.FirebaseAddin
 {
     public class FirebaseSyncServer: SyncServer
     {
+        int latestRev;
+
 		private FirebaseTranspoter fbTransporter;
 		private List<FirebaseNoteObject> notesToBeUploaded;
 		private List<String> guidsMarkedForDeletion;
@@ -46,7 +48,10 @@ namespace Tomboy.FirebaseAddin
 		// NOTE: Only reliable during a transaction
         public int LatestRevision {
             //TODO
-			get;//{	Logger.Debug (" ***  *** * 	LatestRevision propery  ***  *** ");}
+            get {
+                Logger.Debug (" ***  props LATESTREVISION");
+                return latestRev;  
+            }
         }
 
         //
@@ -61,6 +66,7 @@ namespace Tomboy.FirebaseAddin
             notesToBeUploaded = new List<FirebaseNoteObject>();
             guidsMarkedForDeletion = new List<string>();
             Logger.Debug(" ***  BEGINSYNCTRANSACTION");
+            latestRev = fbTransporter.GetLatestRevision () ?? 0;
             return true;
         }
 
@@ -72,7 +78,7 @@ namespace Tomboy.FirebaseAddin
             Logger.Debug(" ***  CANCELSYNCTRANSACTION");
             notesToBeUploaded.Clear ();
             guidsMarkedForDeletion.Clear();
-            return false;
+            return true;
         }
 
         /// <summary>
@@ -80,10 +86,13 @@ namespace Tomboy.FirebaseAddin
         /// </summary>
         /// <returns><c>true</c>, if sync transaction was commited successfully, <c>false</c> otherwise.</returns>
         public bool CommitSyncTransaction (){
-            //TODO
+            //TODO      
             Logger.Debug(" ***  COMMITSYNCTRANSACTION");
-            fbTransporter.UploadToServer(this.notesToBeUploaded,5);
+            fbTransporter.UploadToServer(this.notesToBeUploaded,this.LatestRevision + 1);
+            notesToBeUploaded.Clear ();
             fbTransporter.DeleteFromSerever (guidsMarkedForDeletion);
+            guidsMarkedForDeletion.Clear ();
+
             return true;
         }
 
@@ -113,6 +122,7 @@ namespace Tomboy.FirebaseAddin
             Dictionary<string, NoteUpdate> updates =
                 new Dictionary<string, NoteUpdate> ();
             var serverNotes = fbTransporter.DownloadNotes (revision);
+            //Console.WriteLine (Utils.str (serverNotes));
             foreach (var fn  in serverNotes) {
                 string noteXml = NoteConvert.ToNoteXml(fn);
                 NoteUpdate update = new NoteUpdate (noteXml,
@@ -121,6 +131,7 @@ namespace Tomboy.FirebaseAddin
                                                     fn.LastSyncRevision.Value);
                 updates.Add (fn.Guid, update);
             }
+            //Console.WriteLine (Utils.str (updates));
             return updates;
         }
 

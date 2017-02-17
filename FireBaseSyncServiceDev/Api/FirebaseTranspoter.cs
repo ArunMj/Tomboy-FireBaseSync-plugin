@@ -40,6 +40,7 @@ namespace Tomboy.FirebaseAddin.Api
             Logger.Debug ("$$$ UPDATE@UploadToServer: " + jsonSerializer.Serialize ());
             var r = fbClient.Update ("inventory", jsonSerializer.Serialize ());
             Logger.Debug ("$$$ GOT@UploadToServer : " + r.Body);
+            fbClient.Update ("info","{\"revision\" : " +  revision  + "}");
         }
 
         public List<string> GetUidsFromServer ()
@@ -55,6 +56,12 @@ namespace Tomboy.FirebaseAddin.Api
             var keysCol = uidDict.Keys;
             var keysList = new List<String> (keysCol);
             return keysList;
+        }
+
+        public int? GetLatestRevision(){
+            String resp = fbClient.Get ("info/revision").Body;
+            Logger.Debug ("$$$ [GOT]@GetLatestRevision :" + resp);
+            return int.Parse (resp);
         }
 
         public void DeleteFromSerever (List<String> guids)
@@ -79,11 +86,20 @@ namespace Tomboy.FirebaseAddin.Api
             var resp = fbClient.Get ("inventory", QueryBuilder.New ()
                                      .OrderBy ("revision")
                                      .StartAt (revision + 1)).Body;
+            if(resp.Trim () == "{}"){
+                Logger.Info ("$$$ No notes found in server");
+                return fnotes;
+            }
             jsonDeserializer.SetInput (resp);
             Hyena.Json.JsonObject inventoryDict = (Hyena.Json.JsonObject)jsonDeserializer.Deserialize ();
+            //inventoryDict.Dump ();
             foreach (var item in inventoryDict) {
                 var content = (Hyena.Json.JsonObject)((Hyena.Json.JsonObject)item.Value) ["content"];
-                fnotes.Add (FirebaseNoteObject.FromJson (content));
+                var fnote = FirebaseNoteObject.FromJson (content);
+                fnote.LastSyncRevision = (int)(((Hyena.Json.JsonObject)item.Value) ["revision"]);
+         fnote.Guid = item.Key;
+                fnote.ToJsonObj ().Dump ();
+                fnotes.Add (fnote);
             }
             return fnotes;
         }
